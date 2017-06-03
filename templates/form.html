@@ -8,38 +8,134 @@
     <meta name="description" content="Типограф">
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
-
     <title>Типограф</title>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
   </head>
 
   <body>
-
-    <nav class="navbar">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">Типограф</a>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h1>Типограф не является идеальным инструментом!</h1>
+          <p class="lead">Пожалуйста, проверяйте отформатированный текст перед публикацией:</p>
+          <ul class="list-unstyled">
+            <li>Типограф не позволяет выявить грамматические ошибки текста</li>
+            <li>Типограф может внести ошибочные изменения в тексты не литературного содержания (техническая документация, научные работы)</li>
+            <li></li>
+          </ul>
         </div>
       </div>
-    </nav>
 
-    <div class="container">
+      <hr>
+
       <form method="POST">
-        <div class="form-group">
-          <textarea name="text" class="form-control" rows="10" placeholder="Введите текст" autofocus></textarea>
-        </div>
+        <style>
+        .form-group input[type="checkbox"] {
+            display: none;
+        }
+        .form-group input[type="checkbox"] + .btn-group > label span {
+            width: 20px;
+        }
+        .form-group input[type="checkbox"] + .btn-group > label span:first-child {
+            display: none;
+        }
+        .form-group input[type="checkbox"] + .btn-group > label span:last-child {
+            display: inline-block;
+        }
+        .form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+            display: inline-block;
+        }
+        .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+            display: none;
+        }
+        </style>
+        <div class="form-group"  align="center">
+          <input type="checkbox" name="breaks" value="on" id="fancy-checkbox-info" autocomplete="off" {{ 'checked' if options[0] != None }}/>
+          <div class="btn-group">
+            <label for="fancy-checkbox-info" class="btn btn-info">
+              <span class="glyphicon glyphicon-ok"></span>
+              <span> </span>
+            </label>
+            <label for="fancy-checkbox-info" class="btn btn-info active">
+              Удалить лишние переносы строк
+            </label>
+          </div>
+          <input type="checkbox" name="typographics" value="on" id="fancy-checkbox-warning" autocomplete="off" {{ 'checked' if options[1] != None }}/>
+          <div class="btn-group">
+            <label for="fancy-checkbox-warning" class="btn btn-warning">
+              <span class="glyphicon glyphicon-ok"></span>
+              <span> </span>
+            </label>
+            <label for="fancy-checkbox-warning" class="btn btn-warning active">
+              Заменить типографические знаки и html-теги
+            </label>
+          </div>
+          <input type="checkbox" name="fractions" value="on" id="fancy-checkbox-success" autocomplete="off" {{ 'checked' if options[2] != None }}/>
+          <div class="btn-group">
+            <label for="fancy-checkbox-success" class="btn btn-success">
+              <span class="glyphicon glyphicon-ok"></span>
+              <span> </span>
+            </label>
+            <label for="fancy-checkbox-success" class="btn btn-success active">
+              Замена дробных выражений
+            </label>
+          </div>
+<!--
+          <input type="checkbox" name="fancy-checkbox-info" id="fancy-checkbox-info" autocomplete="off" />
+          <div class="btn-group">
+            <label for="fancy-checkbox-info" class="btn btn-info">
+              <span class="glyphicon glyphicon-ok"></span>
+              <span> </span>
+            </label>
+            <label for="fancy-checkbox-info" class="btn btn-default active">
+              Info Checkbox
+            </label>
+          </div>
+          <input type="checkbox" name="fancy-checkbox-warning" id="fancy-checkbox-warning" autocomplete="off" />
+          <div class="btn-group">
+            <label for="fancy-checkbox-warning" class="btn btn-warning">
+              <span class="glyphicon glyphicon-ok"></span>
+              <span> </span>
+            </label>
+            <label for="fancy-checkbox-warning" class="btn btn-default active">
+              Warning Checkbox
+            </label>
+          </div>
+          <input type="checkbox" name="fancy-checkbox-danger" id="fancy-checkbox-danger" autocomplete="off" />
+          <div class="btn-group">
+            <label for="fancy-checkbox-danger" class="btn btn-danger">
+              <span class="glyphicon glyphicon-ok"></span>
+              <span> </span>
+            </label>
+            <label for="fancy-checkbox-danger" class="btn btn-default active">
+              Danger Checkbox
+            </label>
+          </div>
+-->
+        <hr>
 
-        <div class="form-group">
-          <button class="btn btn-primary" type="submit">Сделать красиво</button>
-        </div>
+          <div class="form-group">
+            <textarea name="text" class="form-control" rows="10" placeholder="Введите текст" autofocus>{{ old_text }}</textarea>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit">Сделать красиво</button>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" rows="10" placeholder="Здесь будет результат" {{ disabled }}">{{ new_text }}</textarea>
+          </div>
+        </form>
 
-        <div class="form-group">
-          <textarea class="form-control" rows="10" placeholder="Здесь будет результат" disabled="disabled"></textarea>
-        </div>
-      </form>
+      <hr>
+
+        <footer>
+          <div class="row">
+            <div class="col-lg-12" align="right">
+              <p>Типограф написан для образовательных целей. Учебный курс для веб-разработчиков <a href="https://devman.org">DEVMAN.org</a>.</p>
+            </div>
+          </div>
+        </footer>
+
     </div><!-- /.container -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
