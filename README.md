@@ -8,15 +8,24 @@
     2. Добавить пару (Название_опции: функция_форматирования) к словарю ***text_editing_functions***.
     3. В [шаблоне][] Типографа добавить блок с чекбоксом указанной функции
 
-    `          <input type="checkbox" name="option_name" value=True id="fancy-checkbox-default" autocomplete="off" {{ 'checked' if 'option_name' in options }}/>
+    `<input type="checkbox" name="option_name" value=True id="fancy-checkbox-default" autocomplete="off" {{ 'checked' if 'option_name' in options }}/>
+
           <div class="btn-group">
+
             <label for="fancy-checkbox-default" class="btn btn-default">
+
               <span class="glyphicon glyphicon-ok"></span>
+
               <span> </span>
+
             </label>
+
             <label for="fancy-checkbox-default" class="btn btn-default active">
+
               Удалить/Отредактировать/Создать что-то..
+
             </label>
+
           </div>`
 
     4. ВНИМАНИЕ! Название_опции в [шаблоне][] и в файле [server.py][] должно быть одинаковым!
