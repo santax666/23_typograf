@@ -40,15 +40,21 @@ def replace_fractional_expressions(text):
     return text_new
 
 
-def typography_text(text, options):
+def get_active_options():
+    text_editing_functions = {'breaks': delete_extra_line_breaks,
+                              'typographics': simple_replace_simbols,
+                              'fractions': replace_fractional_expressions}
+    for option in text_editing_functions.keys():
+        if not request.form.get(option, False):
+            text_editing_functions[option] = False
+    active_options = {k: v for k, v in text_editing_functions.items() if v}
+    return active_options.keys(), active_options.values()
+
+
+def typography_text(text, functions):
     text_new = text
-    breaks, typographics, fractions = options
-    if breaks is not None:
-        text_new = delete_extra_line_breaks(text_new)
-    if typographics is not None:
-        text_new = simple_replace_simbols(text_new)
-    if fractions is not None:
-        text_new = replace_fractional_expressions(text_new)
+    for editing_func in functions:
+        text_new = editing_func(text_new)
     return Typograph.typograph_text(text_new, lang='ru')
 
 
@@ -57,19 +63,14 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def form():
+    options, functions = get_active_options()
     if request.method == 'GET':
-        options = (None, None, None,)
-        return render_template('form.html', disabled='disabled="disabled"',
-                               options=options)
+        return render_template('form.html', disabled=True, options=options)
     else:
         text = request.form["text"]
-        breaks = request.form.get("breaks")
-        typographics = request.form.get("typographics")
-        fractions = request.form.get("fractions")
-        options = (breaks, typographics, fractions,)
-        format_text = typography_text(text, options)
+        formatted_text = typography_text(text, functions)
         return render_template('form.html', old_text=text,
-                               new_text=format_text, options=options)
+                               new_text=formatted_text, options=options)
 
 
 if __name__ == "__main__":
