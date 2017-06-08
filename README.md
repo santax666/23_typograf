@@ -8,7 +8,7 @@
     2. Добавить пару (Название_опции: функция_форматирования) к словарю ***text_editing_functions***.
     3. В [шаблоне][] Типографа добавить блок с чекбоксом указанной функции
 
-    `<input type="checkbox" name="option_name" value=True id="fancy-checkbox-default" autocomplete="off" {{ "checked" if "option_name" in options }}/>
+    ```<input type="checkbox" name="option_name" value=True id="fancy-checkbox-default" autocomplete="off" {{ "checked" if "option_name" in options }}/>
 
           <div class="btn-group">
 
@@ -26,7 +26,7 @@
 
             </label>
 
-          </div>`
+          </div>```
 
     4. ВНИМАНИЕ! Название_опции в [шаблоне][] и в файле [server.py][] должно быть одинаковым!
 
