@@ -10,23 +10,14 @@
     
     ```
     <input type="checkbox" name="option_name" value=True id="fancy-checkbox-default" autocomplete="off" {{ 'checked' if 'option_name' in options }}/>
-
           <div class="btn-group">
-
             <label for="fancy-checkbox-default" class="btn btn-default">
-
               <span class="glyphicon glyphicon-ok"></span>
-
               <span> </span>
-
             </label>
-
             <label for="fancy-checkbox-default" class="btn btn-default active">
-
               Удалить/Отредактировать/Создать что-то..
-
             </label>
-
           </div>
     ```
 
