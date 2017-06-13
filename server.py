@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from chakert import Typograph
+from functools import reduce
 import re
 
 
@@ -52,9 +53,7 @@ def get_active_options():
 
 
 def typography_text(text, functions):
-    text_new = text
-    for editing_func in functions:
-        text_new = editing_func(text_new)
+    text_new = reduce(lambda res, x: x(res), functions, text)
     return Typograph.typograph_text(text_new, lang='ru')
 
 
